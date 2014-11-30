@@ -50,6 +50,13 @@ public class AuctionTemplate implements AuctionBehavior {
 		if (winner == agent.id()) {
 			currentCity = previous.deliveryCity;
 		}
+		System.out.println("winneris:" + winner);
+		System.out.println(bids.length);
+
+		for(long i : bids) {
+			System.out.print(i + " ");
+		}
+		System.out.print("\n");
 	}
 	
 	@Override
@@ -73,7 +80,7 @@ public class AuctionTemplate implements AuctionBehavior {
 	@Override
 	public List<Plan> plan(List<Vehicle> vehicles, TaskSet tasks) {
 		
-//		System.out.println("Agent " + agent.id() + " has tasks " + tasks);
+		System.out.println("Agent " + agent.id() + " has tasks " + tasks);
 
 		Plan planVehicle1 = naivePlan(vehicle, tasks);
 

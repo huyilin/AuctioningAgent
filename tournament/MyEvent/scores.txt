@@ -1,0 +1,10 @@
+### auction.xml ###
+     Agents       | Win - Draw - Lose |      dummy1       |     YourName     
+     dummy1       |     1 - 0 - 1     |         -         | WIN (5413 : 2883)
+    YourName      |     1 - 0 - 1     | WIN (5413 : 2883) |         -        
+
+First company results
+  # wins   : 2
+  # draws  : 0
+  # losses : 0
+

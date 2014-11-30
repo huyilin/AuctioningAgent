@@ -1,0 +1,88 @@
+06:45:04.371 FINE | Run command: java -Xmx1024m -classpath /Users/yilinhu/Documents/Tech/workspace/logist/logist.jar logist.LogistPlatform -o tournament/MyEvent/auction-YourName-dummy1.xml -a tournament/MyEvent/agents.xml config/auction.xml YourName dummy1
+06:45:04.475 CONFIG | Reading config/auction.xml
+06:45:04.537 CONFIG | Reading config/settings_auction.xml
+06:45:04.691 CONFIG | Reading config/topology/england.xml
+06:45:04.706 CONFIG | Reading tournament/MyEvent/agents.xml
+06:45:04.750 CONFIG | winneris:0
+06:45:04.750 CONFIG | 2751 3415 
+06:45:04.751 CONFIG | winneris:0
+06:45:04.751 CONFIG | 2411 3962 
+06:45:04.751 CONFIG | winneris:0
+06:45:04.751 CONFIG | 2967 3575 
+06:45:04.752 CONFIG | winneris:0
+06:45:04.752 CONFIG | 2336 3800 
+06:45:04.753 CONFIG | winneris:0
+06:45:04.753 CONFIG | 3834 4302 
+06:45:04.754 CONFIG | winneris:0
+06:45:04.754 CONFIG | 623 2658 
+06:45:04.755 CONFIG | winneris:0
+06:45:04.755 CONFIG | 2599 4009 
+06:45:04.756 CONFIG | winneris:0
+06:45:04.756 CONFIG | 1431 2467 
+06:45:04.757 CONFIG | winneris:1
+06:45:04.757 CONFIG | 5545 2287 
+06:45:04.757 CONFIG | winneris:1
+06:45:04.757 CONFIG | 3258 1955 
+06:45:04.758 CONFIG | winneris:0
+06:45:04.758 CONFIG | 1194 3161 
+06:45:04.759 CONFIG | winneris:1
+06:45:04.759 CONFIG | 3163 2896 
+06:45:04.759 CONFIG | winneris:0
+06:45:04.760 CONFIG | 1142 2348 
+06:45:04.760 CONFIG | winneris:0
+06:45:04.760 CONFIG | 2088 2101 
+06:45:04.761 CONFIG | winneris:0
+06:45:04.761 CONFIG | 4218 4225 
+06:45:04.762 CONFIG | winneris:1
+06:45:04.762 CONFIG | 1961 873 
+06:45:04.762 CONFIG | winneris:0
+06:45:04.762 CONFIG | 1981 2421 
+06:45:04.763 CONFIG | winneris:0
+06:45:04.763 CONFIG | 2930 3046 
+06:45:04.764 CONFIG | winneris:0
+06:45:04.764 CONFIG | 4928 5709 
+06:45:09.667 INFO | LogistPlatform finished successfully!
+06:45:09.676 FINE | Run command: java -Xmx1024m -classpath /Users/yilinhu/Documents/Tech/workspace/logist/logist.jar logist.LogistPlatform -o tournament/MyEvent/auction-dummy1-YourName.xml -a tournament/MyEvent/agents.xml config/auction.xml dummy1 YourName
+06:45:09.782 CONFIG | Reading config/auction.xml
+06:45:09.864 CONFIG | Reading config/settings_auction.xml
+06:45:10.004 CONFIG | Reading config/topology/england.xml
+06:45:10.020 CONFIG | Reading tournament/MyEvent/agents.xml
+06:45:10.057 CONFIG | winneris:0
+06:45:10.058 CONFIG | 2751 3415 
+06:45:10.059 CONFIG | winneris:0
+06:45:10.059 CONFIG | 2411 3962 
+06:45:10.059 CONFIG | winneris:0
+06:45:10.059 CONFIG | 2967 3575 
+06:45:10.060 CONFIG | winneris:0
+06:45:10.060 CONFIG | 2336 3800 
+06:45:10.061 CONFIG | winneris:0
+06:45:10.061 CONFIG | 3834 4302 
+06:45:10.061 CONFIG | winneris:0
+06:45:10.062 CONFIG | 623 2658 
+06:45:10.062 CONFIG | winneris:0
+06:45:10.062 CONFIG | 2599 4009 
+06:45:10.063 CONFIG | winneris:0
+06:45:10.063 CONFIG | 1431 2467 
+06:45:10.063 CONFIG | winneris:1
+06:45:10.063 CONFIG | 5545 2287 
+06:45:10.064 CONFIG | winneris:1
+06:45:10.064 CONFIG | 3258 1955 
+06:45:10.065 CONFIG | winneris:0
+06:45:10.065 CONFIG | 1194 3161 
+06:45:10.065 CONFIG | winneris:1
+06:45:10.065 CONFIG | 3163 2896 
+06:45:10.066 CONFIG | winneris:0
+06:45:10.066 CONFIG | 1142 2348 
+06:45:10.067 CONFIG | winneris:0
+06:45:10.067 CONFIG | 2088 2101 
+06:45:10.067 CONFIG | winneris:0
+06:45:10.067 CONFIG | 4218 4225 
+06:45:10.068 CONFIG | winneris:1
+06:45:10.068 CONFIG | 1961 873 
+06:45:10.069 CONFIG | winneris:0
+06:45:10.069 CONFIG | 1981 2421 
+06:45:10.069 CONFIG | winneris:0
+06:45:10.069 CONFIG | 2930 3046 
+06:45:10.070 CONFIG | winneris:0
+06:45:10.070 CONFIG | 4928 5709 
+06:45:12.213 INFO | LogistPlatform finished successfully!
