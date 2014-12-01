@@ -81,37 +81,22 @@ public class AuctionTemplate implements AuctionBehavior {
 	public List<Plan> plan(List<Vehicle> vehicles, TaskSet tasks) {
 		
 		System.out.println("Agent " + agent.id() + " has tasks " + tasks);
+		System.out.println("tasks number : " + tasks.size());
 
-		Plan planVehicle1 = naivePlan(vehicle, tasks);
+		CSP csp = new CSP(vehicles, tasks);
+		Encode Aold = csp.Initialize();
+		
+		csp.displayEncode(Aold);
+		System.out.println(csp.computeCost(Aold));
+		
+		Encode Aoptimal = csp.SLS(Aold);
+		
+		csp.displayEncode(Aoptimal);
+		System.out.println(Aoptimal.cost);
+		//System.out.print(csp.computeCost(Aoptimal));
 
-		List<Plan> plans = new ArrayList<Plan>();
-		plans.add(planVehicle1);
-		while (plans.size() < vehicles.size())
-			plans.add(Plan.EMPTY);
-
-		return plans;
+		List<Plan> optimalPlans = csp.computePlan(Aoptimal);
+		return optimalPlans;
 	}
 
-	private Plan naivePlan(Vehicle vehicle, TaskSet tasks) {
-		City current = vehicle.getCurrentCity();
-		Plan plan = new Plan(current);
-
-		for (Task task : tasks) {
-			// move: current city => pickup location
-			for (City city : current.pathTo(task.pickupCity))
-				plan.appendMove(city);
-
-			plan.appendPickup(task);
-
-			// move: pickup location => delivery location
-			for (City city : task.path())
-				plan.appendMove(city);
-
-			plan.appendDelivery(task);
-
-			// set current city
-			current = task.deliveryCity;
-		}
-		return plan;
-	}
 }
