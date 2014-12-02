@@ -16,7 +16,8 @@ public class CSP{
 	public static final int PICKUP = 0;
 	public static final int DELIVERY = 1;
 	private List<Vehicle> vehicles; 
-	private TaskSet tasks;
+	//private TaskSet tasks;
+	HashSet<Task>tasks=new HashSet<Task>();
 	private ArrayList<Encode> recording = new ArrayList<Encode>();
 	private int iteration = 10;
 	private int p1 = 10;
@@ -24,7 +25,7 @@ public class CSP{
 	private int inner_iter = 1;
 	
 	
-	public CSP(List<Vehicle> vehicles, TaskSet tasks) {
+	public CSP(List<Vehicle> vehicles, HashSet<Task> tasks) {
 		this.vehicles = vehicles;
 		this.tasks = tasks;
 	}
@@ -226,7 +227,7 @@ public class CSP{
 		return aSet;
 	}
 	
-	public Encode LocalChoice(HashSet<Encode> aSet, List<Vehicle> vehicles, TaskSet tasks) {
+	public Encode LocalChoice(HashSet<Encode> aSet, List<Vehicle> vehicles, HashSet<Task> tasks) {
 		
 		double optimalCost = 0;
 		double tempCost;
