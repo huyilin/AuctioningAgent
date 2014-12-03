@@ -31,19 +31,22 @@ public class AuctionTemplate implements AuctionBehavior {
     private Agent agent; 
     private Random random; 
     private Vehicle vehicle; 
-    private City currentCity; 
-    private List<Vehicle> vehicles; 
-    HashMap<Task,Long>myBid = new HashMap<Task,Long>(); 
-    HashMap<Task,Long>hisBid = new HashMap<Task,Long>(); 
-    HashMap<Task,Double>ratio = new HashMap<Task,Double>(); 
+    private City currentCity;
+    private List<Vehicle> vehicles;
+    HashMap <Task, Long> myBid = new HashMap <Task, Long> ();
+    HashMap <Task, Long> oppBid = new HashMap <Task, Long> ();
+    HashMap <Task, Double> ratio = new HashMap <Task, Double> (); 
+
+    HashMap <Integer, Double> oppMargin = new HashMap <Integer, Double> ();
     //TaskSet myTask = null; 
-    //TaskSet hisTask = null;
-    HashSet<Task>myTask = new HashSet<Task>();
-    HashSet<Task>hisTask = new HashSet<Task>();
+    //TaskSet oppTask = null;
+    HashSet <Task> myTask = new HashSet <Task> ();
+    HashSet <Task> oppTask = new HashSet <Task> ();
+
     public int numMyTasks = 0;
-    public int numHisTasks = 0;
+    public int numOppTasks = 0;
     //ArrayList<Task>myTask = new ArrayList<Task>(); 
-    //ArrayList<Task>hisTask = new ArrayList<Task>(); 
+    //ArrayList<Task>oppTask = new ArrayList<Task>(); 
      
     @Override 
     public void setup(Topology topology, TaskDistribution distribution, 
@@ -64,28 +67,31 @@ public class AuctionTemplate implements AuctionBehavior {
     public void auctionResult(Task previous, int winner, Long[] bids) { 
     	//System.out.println("agent id : " + agent.id());
     	//System.out.println("winner : " + winner);
-    	System.out.println("Myself" +"bids for " + bids[agent.id()]);
-    	System.out.println("Opponent" + "bids for " + bids[1-agent.id()]);
+        int myself = agent.id();
+        int opp = 1- agent.id();
+    	System.out.println("Myself" +" bids for " + bids[myself]);
+    	System.out.println("Opponent" + " bids for " + bids[opp]);
     	
-        if (winner == agent.id()) {              //i am the winner 
+        if (winner == myself) {              //i am the winner 
         	System.out.println("I win!!!!!!!!!!!!!");
         	System.out.println("*******************************");
             //currentCity = previous.deliveryCity; 
             myTask.add(previous); 
-            myBid.put(previous, bids[agent.id()]); 
-            hisBid.put(previous, bids[1-winner]); 
-            ratio.put(previous, (double) (bids[1-winner] / bids[agent.id()]));
             numMyTasks = numMyTasks + 1;
         } 
         else{                                    // he is the winner 
         	System.out.println("I lose................");
         	System.out.println("*******************************");
-            hisTask.add(previous); 
-            myBid.put(previous, bids[agent.id()]); 
-            hisBid.put(previous, bids[winner]); 
-            ratio.put(previous, (double) (bids[agent.id()] / bids[winner])); 
-            numHisTasks = numHisTasks + 1;
+            oppTask.add(previous);
+            numOppTasks = numOppTasks + 1;
         } 
+            myBid.put(previous, bids[myself]);
+            oppBid.put(previous, bids[opp]);
+//            System.out.println(this.oppMargin);
+//            System.out.println(previous);
+//            System.out.println(this.oppMargin.get(previous.id));
+//            System.out.println(bids[opp]);
+            ratio.put(previous, (double) (bids[opp] / this.oppMargin.get(previous.id)));
         //System.out.println("winneris:" + winner); 
         //System.out.println(bids.length); 
  
@@ -96,45 +102,48 @@ public class AuctionTemplate implements AuctionBehavior {
     } 
      
     public double getRatio(){ 
-        double avg = 0; 
+        double avg = 0;
         double total = 0; 
          
         for(Map.Entry<Task, Double> entry : ratio.entrySet()){ 
             total = total + (double) entry.getValue(); 
-        } 
-        avg = total / ratio.size(); 
-        return avg; 
-    } 
-     
-     
+        }
+        
+        if(ratio.size() == 0) {
+        	avg = 1;
+        } else {
+        	 avg = total / ratio.size();
+        }
+        return avg;
+    }
      
     @Override 
     public Long askPrice(Task task) {     	
         if (vehicle.capacity() < task.weight) 
             return null; 
  
-        long distanceTask = task.pickupCity.distanceUnitsTo(task.deliveryCity);
-        long distanceSum = distanceTask 
-                + currentCity.distanceUnitsTo(task.pickupCity); 
-        //double marginalCost = Measures.unitsToKM(distanceSum 
-        //        * vehicle.costPerKm()); 
-        double mymarginalCost = getMarginalCost(myTask,task,numMyTasks); 
-        double hismarginalCost = getMarginalCost(hisTask,task,numHisTasks); 
-        //double ratio = 1.0 + (random.nextDouble() * 0.05 * task.id); 
-        double ratio = getRatio(); 
-        double bid = 0; 
-        if ((hismarginalCost * ratio) >= mymarginalCost) 
-            bid = hismarginalCost * ratio * 0.995;        //double bid = ratio * marginalCost; 
+        //double MarginCost = Measures.unitsToKM(distanceSum 
+        //        * vehicle.costPerKm());
+        
+        double myMarginCost = getMarginCost(myTask,task,numMyTasks);
+        double oppMarginCost = getMarginCost(oppTask,task, numOppTasks);
+        this.oppMargin.put(task.id, oppMarginCost);
+
+        //double ratio = 1.0 + (random.nextDouble() * 0.05 * task.id);
+        double ratio = getRatio();
+        double bid = 0;
+        if ((oppMarginCost * ratio) >= myMarginCost)
+            bid = oppMarginCost * ratio * 0.995;        //double bid = ratio * MarginCost; 
         else 
-            bid = mymarginalCost * 1.05;         
+            bid = myMarginCost * 1.2;
         return (long) Math.round(bid); 
-    } 
+    }
  
     @Override 
     public List<Plan> plan(List<Vehicle> vehicles, TaskSet tasks) { 
          
         System.out.println("MySelf has tasks number" + tasks.size());
-        System.out.println("Opponent has tasks number" + this.hisTask.size());
+        System.out.println("Opponent has tasks number" + oppTask.size());
         
         HashSet<Task> tsk = new HashSet<Task>();
         for(Task t:tasks){
@@ -146,7 +155,6 @@ public class AuctionTemplate implements AuctionBehavior {
          
         csp.displayEncode(Aold);
         System.out.println(csp.computeCost(Aold));
-         
         Encode Aoptimal = csp.SLS(Aold);
          
         csp.displayEncode(Aoptimal); 
@@ -157,7 +165,7 @@ public class AuctionTemplate implements AuctionBehavior {
         return optimalPlans;
     } 
      
-    public double getMarginalCost(HashSet<Task> tasksPre, Task newTask, int numTasks) {
+    public double getMarginCost(HashSet<Task> tasksPre, Task newTask, int numTasks) {
         double cost; 
         double costPre;
         CSP csp;

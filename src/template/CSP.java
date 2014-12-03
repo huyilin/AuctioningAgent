@@ -359,7 +359,7 @@ public class CSP{
 			return reEncode;
 		}	
 		
-		/*Situation 4*/		
+		/*Situation 4*/
 		else if(a1.type == DELIVERY && a2.type == DELIVERY) {
 			for(int i = id1; i < id2; i++) {
 				if(actionList.get(i).task.equals(a2.task)) {
