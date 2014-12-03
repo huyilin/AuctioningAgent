@@ -64,9 +64,12 @@ public class AuctionTemplate implements AuctionBehavior {
     public void auctionResult(Task previous, int winner, Long[] bids) { 
     	//System.out.println("agent id : " + agent.id());
     	//System.out.println("winner : " + winner);
-    	System.out.println("winner : " + bids[winner]);
-    	System.out.println("not winner" + bids[1-winner]);
+    	System.out.println("Myself" +"bids for " + bids[agent.id()]);
+    	System.out.println("Opponent" + "bids for " + bids[1-agent.id()]);
+    	
         if (winner == agent.id()) {              //i am the winner 
+        	System.out.println("I win!!!!!!!!!!!!!");
+        	System.out.println("*******************************");
             //currentCity = previous.deliveryCity; 
             myTask.add(previous); 
             myBid.put(previous, bids[agent.id()]); 
@@ -75,6 +78,8 @@ public class AuctionTemplate implements AuctionBehavior {
             numMyTasks = numMyTasks + 1;
         } 
         else{                                    // he is the winner 
+        	System.out.println("I lose................");
+        	System.out.println("*******************************");
             hisTask.add(previous); 
             myBid.put(previous, bids[agent.id()]); 
             hisBid.put(previous, bids[winner]); 
@@ -98,19 +103,17 @@ public class AuctionTemplate implements AuctionBehavior {
             total = total + (double) entry.getValue(); 
         } 
         avg = total / ratio.size(); 
-         
         return avg; 
     } 
      
      
      
     @Override 
-    public Long askPrice(Task task) { 
- 
+    public Long askPrice(Task task) {     	
         if (vehicle.capacity() < task.weight) 
             return null; 
  
-        long distanceTask = task.pickupCity.distanceUnitsTo(task.deliveryCity); 
+        long distanceTask = task.pickupCity.distanceUnitsTo(task.deliveryCity);
         long distanceSum = distanceTask 
                 + currentCity.distanceUnitsTo(task.pickupCity); 
         //double marginalCost = Measures.unitsToKM(distanceSum 
@@ -120,7 +123,6 @@ public class AuctionTemplate implements AuctionBehavior {
         //double ratio = 1.0 + (random.nextDouble() * 0.05 * task.id); 
         double ratio = getRatio(); 
         double bid = 0; 
-         
         if ((hismarginalCost * ratio) >= mymarginalCost) 
             bid = hismarginalCost * ratio * 0.995;        //double bid = ratio * marginalCost; 
         else 
@@ -131,30 +133,31 @@ public class AuctionTemplate implements AuctionBehavior {
     @Override 
     public List<Plan> plan(List<Vehicle> vehicles, TaskSet tasks) { 
          
-        System.out.println("Agent " + agent.id() + " has tasks " + tasks); 
-        System.out.println("tasks number : " + tasks.size()); 
+        System.out.println("MySelf has tasks number" + tasks.size());
+        System.out.println("Opponent has tasks number" + this.hisTask.size());
+        
         HashSet<Task> tsk = new HashSet<Task>();
         for(Task t:tasks){
         	tsk.add(t);
         }
  
-        CSP csp = new CSP(vehicles, tsk); 
-        Encode Aold = csp.Initialize(); 
+        CSP csp = new CSP(vehicles, tsk);
+        Encode Aold = csp.Initialize();
          
-        csp.displayEncode(Aold); 
-        System.out.println(csp.computeCost(Aold)); 
+        csp.displayEncode(Aold);
+        System.out.println(csp.computeCost(Aold));
          
-        Encode Aoptimal = csp.SLS(Aold); 
+        Encode Aoptimal = csp.SLS(Aold);
          
         csp.displayEncode(Aoptimal); 
         System.out.println(Aoptimal.cost); 
         //System.out.print(csp.computeCost(Aoptimal)); 
  
-        List<Plan> optimalPlans = csp.computePlan(Aoptimal); 
-        return optimalPlans; 
+        List<Plan> optimalPlans = csp.computePlan(Aoptimal);
+        return optimalPlans;
     } 
      
-    public double getMarginalCost(HashSet<Task> tasksPre, Task newTask, int numTasks) { 
+    public double getMarginalCost(HashSet<Task> tasksPre, Task newTask, int numTasks) {
         double cost; 
         double costPre;
         CSP csp;
@@ -163,19 +166,19 @@ public class AuctionTemplate implements AuctionBehavior {
         	//tasksPre.add(newTask);
         }
         else{
-        	csp = new CSP(this.vehicles, tasksPre); 
+        	csp = new CSP(this.vehicles, tasksPre);
             Encode Aold = csp.Initialize(); 
             costPre = csp.computeCost(Aold);
         }
         //CSP csp = new CSP(this.vehicles, tasksPre); 
         //Encode Aold = csp.Initialize(); 
         //double costPre = csp.computeCost(Aold); 
-        tasksPre.add(newTask); 
-        HashSet<Task> tasksAfter = tasksPre; 
-        csp = new CSP(this.vehicles, tasksAfter); 
-        Encode Aold1 = csp.Initialize(); 
-        double costAfter = csp.computeCost(Aold1); 
-        return costAfter - costPre; 
+        tasksPre.add(newTask);
+        HashSet<Task> tasksAfter = tasksPre;
+        csp = new CSP(this.vehicles, tasksAfter);
+        Encode Aold1 = csp.Initialize();
+        double costAfter = csp.computeCost(Aold1);
+        return costAfter - costPre;
     } 
      
  

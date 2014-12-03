@@ -1,88 +1,207 @@
-06:45:04.371 FINE | Run command: java -Xmx1024m -classpath /Users/yilinhu/Documents/Tech/workspace/logist/logist.jar logist.LogistPlatform -o tournament/MyEvent/auction-YourName-dummy1.xml -a tournament/MyEvent/agents.xml config/auction.xml YourName dummy1
-06:45:04.475 CONFIG | Reading config/auction.xml
-06:45:04.537 CONFIG | Reading config/settings_auction.xml
-06:45:04.691 CONFIG | Reading config/topology/england.xml
-06:45:04.706 CONFIG | Reading tournament/MyEvent/agents.xml
-06:45:04.750 CONFIG | winneris:0
-06:45:04.750 CONFIG | 2751 3415 
-06:45:04.751 CONFIG | winneris:0
-06:45:04.751 CONFIG | 2411 3962 
-06:45:04.751 CONFIG | winneris:0
-06:45:04.751 CONFIG | 2967 3575 
-06:45:04.752 CONFIG | winneris:0
-06:45:04.752 CONFIG | 2336 3800 
-06:45:04.753 CONFIG | winneris:0
-06:45:04.753 CONFIG | 3834 4302 
-06:45:04.754 CONFIG | winneris:0
-06:45:04.754 CONFIG | 623 2658 
-06:45:04.755 CONFIG | winneris:0
-06:45:04.755 CONFIG | 2599 4009 
-06:45:04.756 CONFIG | winneris:0
-06:45:04.756 CONFIG | 1431 2467 
-06:45:04.757 CONFIG | winneris:1
-06:45:04.757 CONFIG | 5545 2287 
-06:45:04.757 CONFIG | winneris:1
-06:45:04.757 CONFIG | 3258 1955 
-06:45:04.758 CONFIG | winneris:0
-06:45:04.758 CONFIG | 1194 3161 
-06:45:04.759 CONFIG | winneris:1
-06:45:04.759 CONFIG | 3163 2896 
-06:45:04.759 CONFIG | winneris:0
-06:45:04.760 CONFIG | 1142 2348 
-06:45:04.760 CONFIG | winneris:0
-06:45:04.760 CONFIG | 2088 2101 
-06:45:04.761 CONFIG | winneris:0
-06:45:04.761 CONFIG | 4218 4225 
-06:45:04.762 CONFIG | winneris:1
-06:45:04.762 CONFIG | 1961 873 
-06:45:04.762 CONFIG | winneris:0
-06:45:04.762 CONFIG | 1981 2421 
-06:45:04.763 CONFIG | winneris:0
-06:45:04.763 CONFIG | 2930 3046 
-06:45:04.764 CONFIG | winneris:0
-06:45:04.764 CONFIG | 4928 5709 
-06:45:09.667 INFO | LogistPlatform finished successfully!
-06:45:09.676 FINE | Run command: java -Xmx1024m -classpath /Users/yilinhu/Documents/Tech/workspace/logist/logist.jar logist.LogistPlatform -o tournament/MyEvent/auction-dummy1-YourName.xml -a tournament/MyEvent/agents.xml config/auction.xml dummy1 YourName
-06:45:09.782 CONFIG | Reading config/auction.xml
-06:45:09.864 CONFIG | Reading config/settings_auction.xml
-06:45:10.004 CONFIG | Reading config/topology/england.xml
-06:45:10.020 CONFIG | Reading tournament/MyEvent/agents.xml
-06:45:10.057 CONFIG | winneris:0
-06:45:10.058 CONFIG | 2751 3415 
-06:45:10.059 CONFIG | winneris:0
-06:45:10.059 CONFIG | 2411 3962 
-06:45:10.059 CONFIG | winneris:0
-06:45:10.059 CONFIG | 2967 3575 
-06:45:10.060 CONFIG | winneris:0
-06:45:10.060 CONFIG | 2336 3800 
-06:45:10.061 CONFIG | winneris:0
-06:45:10.061 CONFIG | 3834 4302 
-06:45:10.061 CONFIG | winneris:0
-06:45:10.062 CONFIG | 623 2658 
-06:45:10.062 CONFIG | winneris:0
-06:45:10.062 CONFIG | 2599 4009 
-06:45:10.063 CONFIG | winneris:0
-06:45:10.063 CONFIG | 1431 2467 
-06:45:10.063 CONFIG | winneris:1
-06:45:10.063 CONFIG | 5545 2287 
-06:45:10.064 CONFIG | winneris:1
-06:45:10.064 CONFIG | 3258 1955 
-06:45:10.065 CONFIG | winneris:0
-06:45:10.065 CONFIG | 1194 3161 
-06:45:10.065 CONFIG | winneris:1
-06:45:10.065 CONFIG | 3163 2896 
-06:45:10.066 CONFIG | winneris:0
-06:45:10.066 CONFIG | 1142 2348 
-06:45:10.067 CONFIG | winneris:0
-06:45:10.067 CONFIG | 2088 2101 
-06:45:10.067 CONFIG | winneris:0
-06:45:10.067 CONFIG | 4218 4225 
-06:45:10.068 CONFIG | winneris:1
-06:45:10.068 CONFIG | 1961 873 
-06:45:10.069 CONFIG | winneris:0
-06:45:10.069 CONFIG | 1981 2421 
-06:45:10.069 CONFIG | winneris:0
-06:45:10.069 CONFIG | 2930 3046 
-06:45:10.070 CONFIG | winneris:0
-06:45:10.070 CONFIG | 4928 5709 
-06:45:12.213 INFO | LogistPlatform finished successfully!
+04:24:27.067 FINE | Run command: java -Xmx1024m -classpath /Users/yilinhu/Documents/Tech/workspace/logist/logist.jar logist.LogistPlatform -o tournament/MyEvent/auction-YourName-dummy1.xml -a tournament/MyEvent/agents.xml config/auction.xml YourName dummy1
+04:24:27.164 CONFIG | Reading config/auction.xml
+04:24:27.224 CONFIG | Reading config/settings_auction.xml
+04:24:27.371 CONFIG | Reading config/topology/england.xml
+04:24:27.387 CONFIG | Reading tournament/MyEvent/agents.xml
+04:24:27.431 CONFIG | Myselfbids for 2889
+04:24:27.431 CONFIG | Opponentbids for 3415
+04:24:27.431 CONFIG | I win!!!!!!!!!!!!!
+04:24:27.431 CONFIG | *******************************
+04:24:27.432 CONFIG | Myselfbids for 4835
+04:24:27.432 CONFIG | Opponentbids for 3962
+04:24:27.432 CONFIG | I lose................
+04:24:27.432 CONFIG | *******************************
+04:24:27.433 CONFIG | Myselfbids for 1262
+04:24:27.434 CONFIG | Opponentbids for 2900
+04:24:27.434 CONFIG | I win!!!!!!!!!!!!!
+04:24:27.434 CONFIG | *******************************
+04:24:27.435 CONFIG | Myselfbids for 5804
+04:24:27.435 CONFIG | Opponentbids for 3129
+04:24:27.435 CONFIG | I lose................
+04:24:27.435 CONFIG | *******************************
+04:24:27.436 CONFIG | Myselfbids for 6093
+04:24:27.436 CONFIG | Opponentbids for 3447
+04:24:27.436 CONFIG | I lose................
+04:24:27.436 CONFIG | *******************************
+04:24:27.437 CONFIG | Myselfbids for 272
+04:24:27.437 CONFIG | Opponentbids for 644
+04:24:27.438 CONFIG | I win!!!!!!!!!!!!!
+04:24:27.438 CONFIG | *******************************
+04:24:27.439 CONFIG | Myselfbids for 5207
+04:24:27.439 CONFIG | Opponentbids for 3277
+04:24:27.439 CONFIG | I lose................
+04:24:27.439 CONFIG | *******************************
+04:24:27.440 CONFIG | Myselfbids for -696
+04:24:27.440 CONFIG | Opponentbids for 1148
+04:24:27.440 CONFIG | I win!!!!!!!!!!!!!
+04:24:27.440 CONFIG | *******************************
+04:24:27.441 CONFIG | Myselfbids for 1472
+04:24:27.441 CONFIG | Opponentbids for 3831
+04:24:27.441 CONFIG | I win!!!!!!!!!!!!!
+04:24:27.441 CONFIG | *******************************
+04:24:27.443 CONFIG | Myselfbids for 2405
+04:24:27.443 CONFIG | Opponentbids for 1319
+04:24:27.443 CONFIG | I lose................
+04:24:27.443 CONFIG | *******************************
+04:24:27.444 CONFIG | Myselfbids for 377
+04:24:27.445 CONFIG | Opponentbids for 3161
+04:24:27.445 CONFIG | I win!!!!!!!!!!!!!
+04:24:27.445 CONFIG | *******************************
+04:24:27.447 CONFIG | Myselfbids for 3240
+04:24:27.447 CONFIG | Opponentbids for 2896
+04:24:27.447 CONFIG | I lose................
+04:24:27.447 CONFIG | *******************************
+04:24:27.449 CONFIG | Myselfbids for 3930
+04:24:27.449 CONFIG | Opponentbids for 2348
+04:24:27.449 CONFIG | I lose................
+04:24:27.449 CONFIG | *******************************
+04:24:27.450 CONFIG | Myselfbids for 11111
+04:24:27.450 CONFIG | Opponentbids for 2502
+04:24:27.450 CONFIG | I lose................
+04:24:27.450 CONFIG | *******************************
+04:24:27.452 CONFIG | Myselfbids for 1738
+04:24:27.452 CONFIG | Opponentbids for 4258
+04:24:27.452 CONFIG | I win!!!!!!!!!!!!!
+04:24:27.452 CONFIG | *******************************
+04:24:27.454 CONFIG | Myselfbids for 4411
+04:24:27.454 CONFIG | Opponentbids for 2013
+04:24:27.454 CONFIG | I lose................
+04:24:27.454 CONFIG | *******************************
+04:24:27.456 CONFIG | Myselfbids for 6752
+04:24:27.456 CONFIG | Opponentbids for 2421
+04:24:27.456 CONFIG | I lose................
+04:24:27.456 CONFIG | *******************************
+04:24:27.457 CONFIG | Myselfbids for 2117
+04:24:27.457 CONFIG | Opponentbids for 2275
+04:24:27.457 CONFIG | I win!!!!!!!!!!!!!
+04:24:27.457 CONFIG | *******************************
+04:24:27.459 CONFIG | Myselfbids for 1164
+04:24:27.459 CONFIG | Opponentbids for 4841
+04:24:27.459 CONFIG | I win!!!!!!!!!!!!!
+04:24:27.459 CONFIG | *******************************
+04:24:31.444 CONFIG | Myselfbids for 6588
+04:24:31.444 CONFIG | Opponentbids for 2790
+04:24:31.445 CONFIG | I lose................
+04:24:31.445 CONFIG | *******************************
+04:24:31.445 CONFIG | MySelf has tasks number9
+04:24:31.445 CONFIG | Opponent has tasks number31
+04:24:31.446 CONFIG | vehicle0:p2----->d2----->p0----->d0----->p17----->d17----->p14----->d14----->
+04:24:31.446 CONFIG | vehicle1:p7----->d7----->p5----->d5----->p18----->d18----->p10----->d10----->p8----->d8----->
+04:24:31.447 CONFIG | 
+04:24:31.447 CONFIG | 22020.0
+04:24:31.456 CONFIG | vehicle0:p10----->p2----->d10----->p0----->d0----->p14----->p17----->d17----->d2----->d14----->
+04:24:31.456 CONFIG | vehicle1:p7----->d7----->p18----->p8----->p5----->d18----->d5----->d8----->
+04:24:31.456 CONFIG | 
+04:24:31.456 CONFIG | 13245.0
+04:24:31.461 CONFIG | Agent 1 has tasks [(Task 1, 3 kg, 3962 CHF, Manchester -> Norwich), (Task 3, 3 kg, 3129 CHF, Sheffield -> Portsmouth), (Task 4, 3 kg, 3447 CHF, Liverpool -> Norwich), (Task 6, 3 kg, 3277 CHF, Cardiff -> London), (Task 9, 3 kg, 1319 CHF, Portsmouth -> Plymouth), (Task 11, 3 kg, 2896 CHF, Portsmouth -> Sheffield), (Task 12, 3 kg, 2348 CHF, Cardiff -> Manchester), (Task 13, 3 kg, 2502 CHF, Newcastle -> Manchester), (Task 15, 3 kg, 2013 CHF, Sheffield -> Liverpool), (Task 16, 3 kg, 2421 CHF, London -> Birmingham), (Task 19, 3 kg, 2790 CHF, Cardiff -> Leeds)]
+04:24:39.355 CONFIG | Wrote tournament/MyEvent/auction-YourName-dummy1.xml
+04:24:39.760 INFO | LogistPlatform finished successfully!
+04:24:39.770 FINE | Run command: java -Xmx1024m -classpath /Users/yilinhu/Documents/Tech/workspace/logist/logist.jar logist.LogistPlatform -o tournament/MyEvent/auction-dummy1-YourName.xml -a tournament/MyEvent/agents.xml config/auction.xml dummy1 YourName
+04:24:39.873 CONFIG | Reading config/auction.xml
+04:24:39.952 CONFIG | Reading config/settings_auction.xml
+04:24:40.109 CONFIG | Reading config/topology/england.xml
+04:24:40.123 CONFIG | Reading tournament/MyEvent/agents.xml
+04:24:40.162 CONFIG | Myselfbids for 2904
+04:24:40.163 CONFIG | Opponentbids for 2751
+04:24:40.163 CONFIG | I lose................
+04:24:40.163 CONFIG | *******************************
+04:24:40.164 CONFIG | Myselfbids for 6347
+04:24:40.164 CONFIG | Opponentbids for 2411
+04:24:40.164 CONFIG | I lose................
+04:24:40.164 CONFIG | *******************************
+04:24:40.165 CONFIG | Myselfbids for 8236
+04:24:40.165 CONFIG | Opponentbids for 2967
+04:24:40.165 CONFIG | I lose................
+04:24:40.165 CONFIG | *******************************
+04:24:40.166 CONFIG | Myselfbids for 12204
+04:24:40.166 CONFIG | Opponentbids for 2336
+04:24:40.166 CONFIG | I lose................
+04:24:40.166 CONFIG | *******************************
+04:24:40.167 CONFIG | Myselfbids for 15015
+04:24:40.167 CONFIG | Opponentbids for 3834
+04:24:40.167 CONFIG | I lose................
+04:24:40.168 CONFIG | *******************************
+04:24:40.169 CONFIG | Myselfbids for 15015
+04:24:40.169 CONFIG | Opponentbids for 623
+04:24:40.169 CONFIG | I lose................
+04:24:40.169 CONFIG | *******************************
+04:24:40.170 CONFIG | Myselfbids for 20119
+04:24:40.170 CONFIG | Opponentbids for 2599
+04:24:40.170 CONFIG | I lose................
+04:24:40.170 CONFIG | *******************************
+04:24:40.171 CONFIG | Myselfbids for 20179
+04:24:40.171 CONFIG | Opponentbids for 1431
+04:24:40.171 CONFIG | I lose................
+04:24:40.171 CONFIG | *******************************
+04:24:40.173 CONFIG | Myselfbids for 20179
+04:24:40.173 CONFIG | Opponentbids for 5545
+04:24:40.173 CONFIG | I lose................
+04:24:40.173 CONFIG | *******************************
+04:24:40.174 CONFIG | Myselfbids for 39121
+04:24:40.174 CONFIG | Opponentbids for 2582
+04:24:40.174 CONFIG | I lose................
+04:24:40.175 CONFIG | *******************************
+04:24:40.176 CONFIG | Myselfbids for 33076
+04:24:40.176 CONFIG | Opponentbids for 2717
+04:24:40.176 CONFIG | I lose................
+04:24:40.176 CONFIG | *******************************
+04:24:40.177 CONFIG | Myselfbids for 24725
+04:24:40.177 CONFIG | Opponentbids for 3163
+04:24:40.177 CONFIG | I lose................
+04:24:40.177 CONFIG | *******************************
+04:24:40.179 CONFIG | Myselfbids for 34494
+04:24:40.179 CONFIG | Opponentbids for 2258
+04:24:40.179 CONFIG | I lose................
+04:24:40.179 CONFIG | *******************************
+04:24:40.180 CONFIG | Myselfbids for 27789
+04:24:40.180 CONFIG | Opponentbids for 2088
+04:24:40.180 CONFIG | I lose................
+04:24:40.180 CONFIG | *******************************
+04:24:40.182 CONFIG | Myselfbids for 31921
+04:24:40.182 CONFIG | Opponentbids for 4218
+04:24:40.182 CONFIG | I lose................
+04:24:40.182 CONFIG | *******************************
+04:24:40.184 CONFIG | Myselfbids for 32015
+04:24:40.184 CONFIG | Opponentbids for 1961
+04:24:40.184 CONFIG | I lose................
+04:24:40.184 CONFIG | *******************************
+04:24:40.186 CONFIG | Myselfbids for 35251
+04:24:40.186 CONFIG | Opponentbids for 1981
+04:24:40.186 CONFIG | I lose................
+04:24:40.186 CONFIG | *******************************
+04:24:40.188 CONFIG | Myselfbids for 37971
+04:24:40.188 CONFIG | Opponentbids for 2930
+04:24:40.188 CONFIG | I lose................
+04:24:40.188 CONFIG | *******************************
+04:24:40.190 CONFIG | Myselfbids for 49751
+04:24:40.190 CONFIG | Opponentbids for 4928
+04:24:40.191 CONFIG | I lose................
+04:24:40.191 CONFIG | *******************************
+04:24:43.577 CONFIG | Agent 0 has tasks [(Task 0, 3 kg, 2751 CHF, Cardiff -> Sheffield), (Task 1, 3 kg, 2411 CHF, Manchester -> Norwich), (Task 2, 3 kg, 2967 CHF, Cardiff -> Manchester), (Task 3, 3 kg, 2336 CHF, Sheffield -> Portsmouth), (Task 4, 3 kg, 3834 CHF, Liverpool -> Norwich), (Task 5, 3 kg, 623 CHF, Norwich -> London), (Task 6, 3 kg, 2599 CHF, Cardiff -> London), (Task 7, 3 kg, 1431 CHF, London -> Manchester), (Task 8, 3 kg, 5545 CHF, Plymouth -> Birmingham), (Task 9, 3 kg, 2582 CHF, Portsmouth -> Plymouth), (Task 10, 3 kg, 2717 CHF, Birmingham -> Cardiff), (Task 11, 3 kg, 3163 CHF, Portsmouth -> Sheffield), (Task 12, 3 kg, 2258 CHF, Cardiff -> Manchester), (Task 13, 3 kg, 2088 CHF, Newcastle -> Manchester), (Task 14, 3 kg, 4218 CHF, Portsmouth -> Liverpool), (Task 15, 3 kg, 1961 CHF, Sheffield -> Liverpool), (Task 16, 3 kg, 1981 CHF, London -> Birmingham), (Task 17, 3 kg, 2930 CHF, Portsmouth -> Norwich), (Task 18, 3 kg, 4928 CHF, Plymouth -> Norwich), (Task 19, 3 kg, 5165 CHF, Cardiff -> Leeds)]
+04:24:43.585 CONFIG | Myselfbids for 44523
+04:24:43.586 CONFIG | Opponentbids for 5165
+04:24:43.586 CONFIG | I lose................
+04:24:43.586 CONFIG | *******************************
+04:24:43.586 CONFIG | MySelf has tasks number0
+04:24:43.586 CONFIG | Opponent has tasks number40
+04:24:43.586 CONFIG | vehicle0:
+04:24:43.586 CONFIG | vehicle1:
+04:24:43.586 CONFIG | 
+04:24:43.586 CONFIG | 0.0
+04:24:52.191 WARNING | Exception in thread "Thread-2" logist.LogistException: agent YourName was interrupted: null
+04:24:52.192 WARNING | 	at logist.agent.TimeoutGuard.schedule(TimeoutGuard.java:31)
+04:24:52.193 WARNING | 	at logist.agent.AuctionAgent.nextAction(AuctionAgent.java:120)
+04:24:52.193 WARNING | 	at logist.simulation.VehicleImpl.executeNextAction(VehicleImpl.java:84)
+04:24:52.194 WARNING | 	at logist.simulation.Simulation.step(Simulation.java:108)
+04:24:52.195 WARNING | 	at logist.gui.SimulationModel$1.execute(SimulationModel.java:157)
+04:24:52.196 WARNING | 	at uchicago.src.sim.engine.ScheduleGroup.execute(Unknown Source)
+04:24:52.197 WARNING | 	at uchicago.src.sim.engine.RandomScheduleGroup.execute(Unknown Source)
+04:24:52.197 WARNING | 	at uchicago.src.sim.engine.Schedule.execute(Unknown Source)
+04:24:52.198 WARNING | 	at uchicago.src.sim.engine.BaseController$1.run(Unknown Source)
+04:24:52.199 WARNING | 	at java.lang.Thread.run(Thread.java:745)
+04:24:52.200 WARNING | Caused by: java.lang.InterruptedException
+04:24:52.200 WARNING | 	at java.util.concurrent.FutureTask.awaitDone(FutureTask.java:400)
+04:24:52.201 WARNING | 	at java.util.concurrent.FutureTask.get(FutureTask.java:199)
+04:24:52.201 WARNING | 	at logist.agent.TimeoutGuard.schedule(TimeoutGuard.java:29)
+04:24:52.202 WARNING | 	... 9 more
+04:24:52.234 INFO | LogistPlatform finished successfully!
