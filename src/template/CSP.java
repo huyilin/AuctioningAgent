@@ -19,7 +19,7 @@ public class CSP{
 	//private TaskSet tasks;
 	HashSet<Task>tasks=new HashSet<Task>();
 	private ArrayList<Encode> recording = new ArrayList<Encode>();
-	private int iteration = 10;
+	private int iteration = 10000;
 	private int p1 = 10;
 	private int steps = 50;
 	private int inner_iter = 1;
@@ -40,6 +40,7 @@ public class CSP{
 		
 		for(Vehicle vehicle : vehicles) {
 			capacities.put(vehicle, vehicle.capacity());
+			aEncode.firstActions.put(vehicle, null);
 		}
 
 		Random randomGenerator = new Random();
@@ -109,15 +110,26 @@ public class CSP{
 	public Encode SLS(Encode aVector) {
 		Encode aOld, aNew;
 		HashSet <Encode> newNeighbors = new HashSet<Encode>();
-
+		int count = 0;
+		
+		for(Vehicle vehicle : aVector.firstActions.keySet()) {
+			if (aVector.firstActions.get(vehicle) == null)  {
+				count ++;
+			}
+		}
+		
+		if(count == this.vehicles.size()) {
+			return aVector;
+		}
+		
 		Random randGen = new Random();
 		int iter = 0;
 		int step = this.steps;
 		aNew = aVector;
 		aOld = aNew;
-
 		while(iter < iteration) {
 			newNeighbors = ChooseNeighbors(aOld);
+			newNeighbors.add(aOld);
 			int samplespace = randGen.nextInt(100);
 			aNew = LocalChoice(newNeighbors, vehicles, tasks);
 			if (samplespace <= p1) {
@@ -132,6 +144,7 @@ public class CSP{
 				step = this.steps;
 			}
 			iter++;
+			
 		}
 		return findMiniCost(recording); 
 	}
@@ -155,7 +168,7 @@ public class CSP{
 		int limit = inner_iter;
 		Encode randEncode = null;
 		boolean sign = true;
-		
+
 		while(limit > 0) {
 			actionList = new ArrayList<cAction>();
 			Random randomGenerator = new Random();
@@ -168,7 +181,7 @@ public class CSP{
 					randEncode = tempSet.get(rand1);
 					tempSet = new ArrayList<Encode>();
 			}
-
+		
 			while(true) {
 				int rand2 = randomGenerator.nextInt(vehicles.size());
 				currentVehicle = vehicles.get(rand2);
@@ -176,21 +189,20 @@ public class CSP{
 					break;
 				}
 			}
-			
+
 			cAction action = randEncode.firstActions.get(currentVehicle);
 			
 			while (action != null) {
 				actionList.add(action);
 				action = randEncode.nextActions.get(action);
 			}
-			
+
 			//System.out.println("From vehicle: " + currentVehicle.id() + " to the following");
 			//System.out.println("original");
 			//this.displayEncode(randEncode);
-			
+
 			for (Vehicle v : vehicles) {
 				if (!v.equals(currentVehicle) ) {
-					
 					//System.out.println(currentVehicle.id()+ "--------->" + v.id());
 					Encode aChangeV = ChangeVehicle(randEncode, currentVehicle, v, actionList);
 					if(aChangeV != null) {
@@ -249,7 +261,6 @@ public class CSP{
 		}
 		optimal.cost = optimalCost;
 		return optimal;
-		
 	}
 	
 	private int findFinalPre(Encode aVector, Vehicle vi, List<cAction> actionList) {
