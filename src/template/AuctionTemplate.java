@@ -37,7 +37,6 @@ public class AuctionTemplate implements AuctionBehavior {
     HashMap <Task, Long> oppBid = new HashMap <Task, Long> ();
     ArrayList <Double> ratioList = new ArrayList <Double> ();
     ArrayList <Double> ratioCum = new ArrayList <Double> ();
-    ArrayList <Double> ratioAvg = new ArrayList <Double> ();
     private double damping = 0.6;
     private double myPart = 0.4;
     private double lastRatio = 1;
@@ -84,15 +83,15 @@ public class AuctionTemplate implements AuctionBehavior {
         	if (ratio < 3) {
         		System.out.printf("The realtime ratio is : %.2f \n", ratio);
             	ratioList.add(ratio);
-//            	double newRatio = damping*lastRatio + (1 - damping)*ratio;
-//            	lastRatio = newRatio;
-//            	ratioCum.add(newRatio);
+            	double newRatio = damping*lastRatio + (1 - damping)*ratio;
+            	lastRatio = newRatio;
+            	ratioCum.add(newRatio);
         	} else {
         		System.out.printf("The realtime ratio is : %.2f \n", ratio);
-//            	ratioList.add(ratio);
-//            	double newRatio = damping*lastRatio + (1 - damping)*((double) 2);
-//            	lastRatio = newRatio;
-//            	ratioCum.add(newRatio);
+            	ratioList.add(ratio);
+            	double newRatio = damping*lastRatio + (1 - damping)*((double) 3);
+            	lastRatio = newRatio;
+            	ratioCum.add(newRatio);
         	}
         }
     }
@@ -102,23 +101,6 @@ public class AuctionTemplate implements AuctionBehavior {
     	 ratioCum.add(lastRatio);
     	 return 1;
      } else return ratioCum.get(ratioCum.size() - 1);
-    }
-    
-    public double getRatio(){ 
-        double avg = 0;
-        double total = 0;
-         
-        for(double ratio : this.ratioList) { 
-            total = total + ratio;
-        }
-        
-        if(ratioList.size() == 0) {
-        	avg = 1;
-        } else {
-        	 avg = total / ratioList.size();
-        	 this.ratioAvg.add(avg);
-        }
-        return avg;
     }
      
     @Override
@@ -134,9 +116,8 @@ public class AuctionTemplate implements AuctionBehavior {
         
         this.oppMargin.put(task.id, oppMarginCost);
 
-        double ratio = getRatio();
-//      double ratio = getCumRatio();
-        System.out.printf("The Average ratio is : %.2f \n", ratio);
+        double ratio = getCumRatio();
+        System.out.printf("The cummulated ratio is : %.2f \n", ratio);
         double bid = 0;
         if ((oppMarginCost * ratio) >= myMarginCost)
             bid = (oppMarginCost * ratio*(1-myPart) + myMarginCost*myPart);        //double bid = ratio * MarginCost;
@@ -158,8 +139,8 @@ public class AuctionTemplate implements AuctionBehavior {
         }
         System.out.println("");
         
-        System.out.println("****************Ratio Average for use***************");
-        for (double ratio : this.ratioAvg) {
+        System.out.println("****************Ratio Cum for use***************");
+        for (double ratio : this.ratioCum) {
         	System.out.printf("%.2f,  ", ratio);
         }
         System.out.println("");
