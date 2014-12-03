@@ -89,7 +89,7 @@ public class AuctionTemplate implements AuctionBehavior {
 //            	ratioCum.add(newRatio);
         	} else {
         		System.out.printf("The realtime ratio is : %.2f \n", ratio);
-            	ratioList.add(ratio);
+//            	ratioList.add(ratio);
 //            	double newRatio = damping*lastRatio + (1 - damping)*((double) 2);
 //            	lastRatio = newRatio;
 //            	ratioCum.add(newRatio);
@@ -108,7 +108,7 @@ public class AuctionTemplate implements AuctionBehavior {
         double avg = 0;
         double total = 0;
          
-        for(double ratio : this.ratioList){ 
+        for(double ratio : this.ratioList) { 
             total = total + ratio;
         }
         
@@ -194,7 +194,7 @@ public class AuctionTemplate implements AuctionBehavior {
         	tasks.add(task);
         }
     
-        if (tasks.size() == 0){
+        if (tasks.size() == 0) {
         	costPre = 0;
         } else{
     		csp = new CSP(this.vehicles, tasks);
