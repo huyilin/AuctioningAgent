@@ -26,7 +26,7 @@ import logist.topology.Topology.City;
 @SuppressWarnings("unused") 
 public class AuctionTemplate implements AuctionBehavior { 
  
-    private Topology topology; 
+    private Topology topology;
     private TaskDistribution distribution; 
     private Agent agent; 
     private Random random; 
@@ -35,19 +35,13 @@ public class AuctionTemplate implements AuctionBehavior {
     private List<Vehicle> vehicles;
     HashMap <Task, Long> myBid = new HashMap <Task, Long> ();
     HashMap <Task, Long> oppBid = new HashMap <Task, Long> ();
-    HashMap <Task, Double> ratio = new HashMap <Task, Double> (); 
-
+    ArrayList <Double> ratioList = new ArrayList <Double> ();
+    ArrayList <Double> ratioAvg = new ArrayList <Double> ();
+    
     HashMap <Integer, Double> oppMargin = new HashMap <Integer, Double> ();
-    //TaskSet myTask = null; 
-    //TaskSet oppTask = null;
     HashSet <Task> myTask = new HashSet <Task> ();
     HashSet <Task> oppTask = new HashSet <Task> ();
-
-    public int numMyTasks = 0;
-    public int numOppTasks = 0;
-    //ArrayList<Task>myTask = new ArrayList<Task>(); 
-    //ArrayList<Task>oppTask = new ArrayList<Task>(); 
-     
+    
     @Override 
     public void setup(Topology topology, TaskDistribution distribution, 
             Agent agent) { 
@@ -55,98 +49,105 @@ public class AuctionTemplate implements AuctionBehavior {
         this.topology = topology; 
         this.distribution = distribution; 
         this.agent = agent; 
-        this.vehicle = agent.vehicles().get(0); 
-        this.vehicles = agent.vehicles(); 
-        this.currentCity = vehicle.homeCity(); 
+        this.vehicle = agent.vehicles().get(0);
+        this.vehicles = agent.vehicles();
+        this.currentCity = vehicle.homeCity();
  
         long seed = -9019554669489983951L * currentCity.hashCode() * agent.id(); 
         this.random = new Random(seed); 
     } 
  
-    @Override 
-    public void auctionResult(Task previous, int winner, Long[] bids) { 
-    	//System.out.println("agent id : " + agent.id());
-    	//System.out.println("winner : " + winner);
+    @Override
+    public void auctionResult(Task previous, int winner, Long[] bids) {
         int myself = agent.id();
         int opp = 1- agent.id();
-    	System.out.println("Myself" +" bids for " + bids[myself]);
-    	System.out.println("Opponent" + " bids for " + bids[opp]);
     	
         if (winner == myself) {              //i am the winner 
         	System.out.println("I win!!!!!!!!!!!!!");
-        	System.out.println("*******************************");
-            //currentCity = previous.deliveryCity; 
             myTask.add(previous); 
-            numMyTasks = numMyTasks + 1;
+        }	else{                                    // he is the winner
+        		System.out.println("I lose................");
+        		oppTask.add(previous);
         } 
-        else{                                    // he is the winner 
-        	System.out.println("I lose................");
-        	System.out.println("*******************************");
-            oppTask.add(previous);
-            numOppTasks = numOppTasks + 1;
-        } 
-            myBid.put(previous, bids[myself]);
-            oppBid.put(previous, bids[opp]);
-//            System.out.println(this.oppMargin);
-//            System.out.println(previous);
-//            System.out.println(this.oppMargin.get(previous.id));
-//            System.out.println(bids[opp]);
-            ratio.put(previous, (double) (bids[opp] / this.oppMargin.get(previous.id)));
-        //System.out.println("winneris:" + winner); 
-        //System.out.println(bids.length); 
- 
-        //for(long i : bids) { 
-            //System.out.print(i + " "); 
-        //} 
-        //System.out.print("\n"); 
+        
+        System.out.println("Myself" +" bids for " + bids[myself]);
+    	System.out.println("Opponent" + " bids for " + bids[opp]);
+    	
+        myBid.put(previous, bids[myself]);
+        oppBid.put(previous, bids[opp]);
+        if (this.oppMargin.get(previous.id) > 0) {
+        	double ratio = (double) (bids[opp] / this.oppMargin.get(previous.id));
+        	if (ratio < 3) {
+        		System.out.printf("The realtime ratio is : %.2f \n", ratio);
+            	ratioList.add(ratio);
+        	}
+        }
+            
     } 
      
     public double getRatio(){ 
         double avg = 0;
-        double total = 0; 
+        double total = 0;
          
-        for(Map.Entry<Task, Double> entry : ratio.entrySet()){ 
-            total = total + (double) entry.getValue(); 
+        for(double ratio : this.ratioList){ 
+            total = total + ratio;
         }
         
-        if(ratio.size() == 0) {
+        if(ratioList.size() == 0) {
         	avg = 1;
         } else {
-        	 avg = total / ratio.size();
+        	 avg = total / ratioList.size();
+        	 this.ratioAvg.add(avg);
         }
         return avg;
     }
      
-    @Override 
+    @Override
     public Long askPrice(Task task) {     	
         if (vehicle.capacity() < task.weight) 
             return null; 
- 
-        //double MarginCost = Measures.unitsToKM(distanceSum 
-        //        * vehicle.costPerKm());
+    	
+        double myMarginCost = getMarginCost(myTask, task);
+        double oppMarginCost = getMarginCost(oppTask, task);
+        System.out.println("*******************************");
+        System.out.println("Myself marginal cost: " + myMarginCost);
+    	System.out.println("Opponent marginal cost: " + oppMarginCost);
         
-        double myMarginCost = getMarginCost(myTask,task,numMyTasks);
-        double oppMarginCost = getMarginCost(oppTask,task, numOppTasks);
         this.oppMargin.put(task.id, oppMarginCost);
 
-        //double ratio = 1.0 + (random.nextDouble() * 0.05 * task.id);
         double ratio = getRatio();
+        
+        System.out.printf("The average ratio is : %.2f \n", ratio);
         double bid = 0;
         if ((oppMarginCost * ratio) >= myMarginCost)
-            bid = oppMarginCost * ratio * 0.995;        //double bid = ratio * MarginCost; 
+            bid = (oppMarginCost * ratio*0.6 + myMarginCost*0.4);        //double bid = ratio * MarginCost;
         else 
-            bid = myMarginCost * 1.2;
+            bid = myMarginCost * 1.1;
         return (long) Math.round(bid); 
     }
  
-    @Override 
-    public List<Plan> plan(List<Vehicle> vehicles, TaskSet tasks) { 
-         
+    @Override
+    public List<Plan> plan(List<Vehicle> vehicles, TaskSet tasks) {
+    	
+    	System.out.println("*******************************");
         System.out.println("MySelf has tasks number" + tasks.size());
         System.out.println("Opponent has tasks number" + oppTask.size());
         
-        HashSet<Task> tsk = new HashSet<Task>();
-        for(Task t:tasks){
+        System.out.println("*************Ratio in Realtime******************");
+        for (double ratio : this.ratioList) {
+        	System.out.printf("%.2f,  ", ratio);
+        }
+        System.out.println("");
+        
+        System.out.println("****************Ratio Average for use***************");
+        for (double ratio : this.ratioAvg) {
+        	System.out.printf("%.2f,  ", ratio);
+        }
+        System.out.println("");
+
+        
+        HashSet<Task> tsk = new HashSet<Task> ();
+        for(Task t:tasks) {
         	tsk.add(t);
         }
  
@@ -157,33 +158,34 @@ public class AuctionTemplate implements AuctionBehavior {
         System.out.println(csp.computeCost(Aold));
         Encode Aoptimal = csp.SLS(Aold);
          
-        csp.displayEncode(Aoptimal); 
-        System.out.println(Aoptimal.cost); 
-        //System.out.print(csp.computeCost(Aoptimal)); 
+        csp.displayEncode(Aoptimal);
+        System.out.println(Aoptimal.cost);
  
         List<Plan> optimalPlans = csp.computePlan(Aoptimal);
         return optimalPlans;
-    } 
+    }
      
-    public double getMarginCost(HashSet<Task> tasksPre, Task newTask, int numTasks) {
-        double cost; 
+    public double getMarginCost(HashSet<Task> tasksPre, Task newTask) {
+        double cost;
         double costPre;
         CSP csp;
-        if (numTasks == 0){
+        HashSet<Task> tasks = new HashSet<Task> ();
+        
+        for(Task task : tasksPre) {
+        	tasks.add(task);
+        }
+    
+        if (tasks.size() == 0){
         	costPre = 0;
-        	//tasksPre.add(newTask);
+        } else{
+    		csp = new CSP(this.vehicles, tasks);
+    		Encode Aold = csp.Initialize();
+    		costPre = csp.computeCost(Aold);
         }
-        else{
-        	csp = new CSP(this.vehicles, tasksPre);
-            Encode Aold = csp.Initialize(); 
-            costPre = csp.computeCost(Aold);
-        }
-        //CSP csp = new CSP(this.vehicles, tasksPre); 
-        //Encode Aold = csp.Initialize(); 
-        //double costPre = csp.computeCost(Aold); 
-        tasksPre.add(newTask);
-        HashSet<Task> tasksAfter = tasksPre;
-        csp = new CSP(this.vehicles, tasksAfter);
+        
+        tasks.add(newTask); 		//Add new task;
+        
+        csp = new CSP(this.vehicles, tasks);
         Encode Aold1 = csp.Initialize();
         double costAfter = csp.computeCost(Aold1);
         return costAfter - costPre;
