@@ -540,7 +540,6 @@ public class CSP{
 		return false;
 	}
 	
-	
 	public void displayEncode(Encode encode ) {
 		
 		for(Vehicle v : this.vehicles) {
