@@ -83,7 +83,9 @@ public class AuctionTemplate implements AuctionBehavior {
         	if (ratio < 3) {
         		System.out.printf("The realtime ratio is : %.2f \n", ratio);
             	ratioList.add(ratio);
-        	}
+        	} else {
+                System.out.printf("The realtime ratio is : %.2f \n", ratio);
+            }
         }
             
     } 
