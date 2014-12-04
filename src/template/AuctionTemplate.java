@@ -33,6 +33,8 @@ public class AuctionTemplate implements AuctionBehavior {
     private Vehicle vehicle; 
     private City currentCity;
     private List<Vehicle> vehicles;
+    private double myPart = 0.4;
+
     HashMap <Task, Long> myBid = new HashMap <Task, Long> ();
     HashMap <Task, Long> oppBid = new HashMap <Task, Long> ();
     ArrayList <Double> ratioList = new ArrayList <Double> ();
@@ -41,6 +43,7 @@ public class AuctionTemplate implements AuctionBehavior {
     HashMap <Integer, Double> oppMargin = new HashMap <Integer, Double> ();
     HashSet <Task> myTask = new HashSet <Task> ();
     HashSet <Task> oppTask = new HashSet <Task> ();
+
     
     @Override 
     public void setup(Topology topology, TaskDistribution distribution, 
@@ -120,7 +123,7 @@ public class AuctionTemplate implements AuctionBehavior {
         System.out.printf("The average ratio is : %.2f \n", ratio);
         double bid = 0;
         if ((oppMarginCost * ratio) >= myMarginCost)
-            bid = (oppMarginCost * ratio*0.6 + myMarginCost*0.4);        //double bid = ratio * MarginCost;
+            bid = (oppMarginCost * ratio*(1 - myPart) + myMarginCost*myPart);        //double bid = ratio * MarginCost;
         else 
             bid = myMarginCost * 1.1;
         return (long) Math.round(bid); 
@@ -190,6 +193,4 @@ public class AuctionTemplate implements AuctionBehavior {
         double costAfter = csp.computeCost(Aold1);
         return costAfter - costPre;
     } 
-     
- 
 }

@@ -23,6 +23,7 @@ public class CSP{
 	private int p1 = 10;
 	private int steps = 50;
 	private int inner_iter = 1;
+	private double myPart = 0.4;
 	
 	
 	public CSP(List<Vehicle> vehicles, HashSet<Task> tasks) {
