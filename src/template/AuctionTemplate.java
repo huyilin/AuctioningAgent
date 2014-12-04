@@ -14,7 +14,7 @@ import logist.simulation.Vehicle;
 import logist.plan.Plan; 
 import logist.task.Task; 
 import logist.task.TaskDistribution; 
-import logist.task.TaskSet; 
+import logist.task.TaskSet;
 import logist.topology.Topology; 
 import logist.topology.Topology.City; 
  
@@ -34,6 +34,10 @@ public class AuctionTemplate implements AuctionBehavior {
     private City currentCity;
     private List<Vehicle> vehicles;
     private double myPart = 0.4;
+    private long attackNum = 999999999;
+    private int majorIteration = 100000;
+    private int subIteration = 20000;
+    private boolean hasAttack = false;
 
     HashMap <Task, Long> myBid = new HashMap <Task, Long> ();
     HashMap <Task, Long> oppBid = new HashMap <Task, Long> ();
@@ -78,7 +82,7 @@ public class AuctionTemplate implements AuctionBehavior {
     	
         myBid.put(previous, bids[myself]);
         oppBid.put(previous, bids[opp]);
-        if (this.oppMargin.get(previous.id) > 0) {
+        if (this.oppMargin.get(previous.id) > 0 && bids[opp] > 0 ) {
         	double ratio = (double) (bids[opp] / this.oppMargin.get(previous.id));
         	if (ratio < 3) {
         		System.out.printf("The realtime ratio is : %.2f \n", ratio);
@@ -124,10 +128,18 @@ public class AuctionTemplate implements AuctionBehavior {
         
         System.out.printf("The average ratio is : %.2f \n", ratio);
         double bid = 0;
+        
         if ((oppMarginCost * ratio) >= myMarginCost)
             bid = (oppMarginCost * ratio*(1 - myPart) + myMarginCost*myPart);        //double bid = ratio * MarginCost;
-        else 
-            bid = myMarginCost * 1.1;
+        else {
+        	bid = myMarginCost * 1.1;
+        }
+        
+        if(this.ratioAvg.size() == 1 && !hasAttack) {
+        	bid = this.attackNum;
+        	hasAttack = true;
+        }
+        
         return (long) Math.round(bid); 
     }
  
@@ -157,7 +169,7 @@ public class AuctionTemplate implements AuctionBehavior {
         }
  
         CSP csp = new CSP(vehicles, tsk);
-        csp.iteration = 70000;
+        csp.iteration = majorIteration;
         Encode Aold = csp.Initialize();
          
         csp.displayEncode(Aold);
@@ -185,6 +197,7 @@ public class AuctionTemplate implements AuctionBehavior {
         	costPre = 0;
         } else{
     		csp = new CSP(this.vehicles, tasks);
+    		csp.iteration = subIteration;
     		Encode Aold = csp.Initialize();
     		costPre = csp.computeCost(Aold);
         }
@@ -193,6 +206,7 @@ public class AuctionTemplate implements AuctionBehavior {
         
         csp = new CSP(this.vehicles, tasks);
         Encode Aold1 = csp.Initialize();
+        csp.iteration = subIteration;
         double costAfter = csp.computeCost(Aold1);
         return costAfter - costPre;
     } 

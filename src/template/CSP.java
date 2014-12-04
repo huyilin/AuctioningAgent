@@ -250,7 +250,6 @@ public class CSP{
 			break;
 		}
 	
-		
 		for(Encode neighbor : aSet) {                         // compute the optimal cost and optimal solution 
 			tempCost = computeCost(neighbor);
 			if (tempCost < optimalCost){
