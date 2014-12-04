@@ -157,6 +157,7 @@ public class AuctionTemplate implements AuctionBehavior {
         }
  
         CSP csp = new CSP(vehicles, tsk);
+        csp.iteration = 70000;
         Encode Aold = csp.Initialize();
          
         csp.displayEncode(Aold);

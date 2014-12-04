@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Random;
 
 import logist.simulation.Vehicle;
-import logist.task.TaskSet;
 import logist.task.Task;
 import logist.plan.Plan;
 import logist.topology.Topology.City;
@@ -19,11 +18,10 @@ public class CSP{
 	//private TaskSet tasks;
 	HashSet<Task>tasks=new HashSet<Task>();
 	private ArrayList<Encode> recording = new ArrayList<Encode>();
-	private int iteration = 10000;
+	public int iteration = 20000;
 	private int p1 = 10;
 	private int steps = 50;
-	private int inner_iter = 1;
-	private double myPart = 0.4;
+	private int inner_iter = 10;
 	
 	
 	public CSP(List<Vehicle> vehicles, HashSet<Task> tasks) {
