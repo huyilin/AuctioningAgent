@@ -82,7 +82,7 @@ public class AuctionTemplate implements AuctionBehavior {
         	double ratio = (double) (bids[opp] / this.oppMargin.get(previous.id));
         	if (ratio < 3) {
         		System.out.printf("The realtime ratio is : %.2f \n", ratio);
-            	ratioList.add(ratio);
+                ratioList.add(ratio);
             	double newRatio = damping*lastRatio + (1 - damping)*ratio;
             	lastRatio = newRatio;
             	ratioCum.add(newRatio);
